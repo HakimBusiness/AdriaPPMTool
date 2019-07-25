@@ -28,4 +28,8 @@ public class ProjectService {
             if(p==null) throw new ProjectIdException("Project doesn't exist !");
             return p;
     }
+
+    public Iterable<project> findAll(){
+        return projectRepository.findAll();
+    }
 }

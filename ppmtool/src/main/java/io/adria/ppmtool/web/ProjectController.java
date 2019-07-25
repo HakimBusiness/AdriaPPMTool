@@ -38,4 +38,8 @@ public class ProjectController {
         project p =projectService.findProject(identifier.toUpperCase());
         return new ResponseEntity<project>(p,HttpStatus.OK);
     }
+    @GetMapping("/all")
+    ResponseEntity<Iterable<project>> getAll(){
+        return new ResponseEntity<Iterable<project>>(projectService.findAll(),HttpStatus.OK);
+    }
 }
