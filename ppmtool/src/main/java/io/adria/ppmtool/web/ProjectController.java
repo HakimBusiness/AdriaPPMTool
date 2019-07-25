@@ -1,6 +1,7 @@
 package io.adria.ppmtool.web;
 
 import io.adria.ppmtool.domain.project;
+import io.adria.ppmtool.services.MapValidationErrorService;
 import io.adria.ppmtool.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,19 +23,15 @@ import java.util.Map;
 public class ProjectController {
     @Autowired
     ProjectService projectService;
+    @Autowired
+    MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
     ResponseEntity<?> addProject(@Valid  @RequestBody project p, BindingResult result)
     {
-        if(result.hasErrors())
-        {
-            Map<String,String> errorMap=new HashMap<>();
-            for(FieldError err:result.getFieldErrors())
-            {
-                errorMap.put(err.getField(),err.getDefaultMessage());
-            }
-            return new ResponseEntity<Map<String,String>>(errorMap,HttpStatus.BAD_REQUEST);
-        }
+        ResponseEntity<?> ValidationErrors=mapValidationErrorService.ErrorsMap(result);
+        if(ValidationErrors!=null) return ValidationErrors;
+
         project p1=projectService.saveOrUpdateProject(p);
         return new ResponseEntity<project>(p, HttpStatus.CREATED);
     }
