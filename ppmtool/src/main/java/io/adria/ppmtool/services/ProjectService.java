@@ -14,11 +14,11 @@ public class ProjectService {
     public project saveOrUpdateProject(project p)
     {
         try{
-            p.setProjectIdentifier(p.getProjectIdentifier().toUpperCase());
+            p.setProjectIdentifier(p.getProjectsIdentifier().toUpperCase());
             return projectRepository.save(p);
         }
         catch (Exception e){
-           throw new ProjectIdException("Project ID "+p.getProjectIdentifier()+" Already exists !");
+           throw new ProjectIdException("Project ID "+p.getProjectsIdentifier()+" Already exists !");
         }
 
     }

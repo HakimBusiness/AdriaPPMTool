@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 class ProjectItem extends Component {
     render() {
-        const { project } = this.props;
+        const  project  = this.props.project;
         return (
             
             <div className="container">
