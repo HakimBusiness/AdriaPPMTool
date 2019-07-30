@@ -7,7 +7,7 @@ public class ProjectIdExceptionResponse {
         this.projectException = projectException;
     }
 
-    public String getProjectsException() {
+    public String getProjectException() {
         return projectException;
     }
 

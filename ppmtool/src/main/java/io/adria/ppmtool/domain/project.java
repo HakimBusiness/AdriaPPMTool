@@ -40,7 +40,7 @@ public class project {
         this.id = id;
     }
 
-    public String getProjectsName() {
+    public String getProjectName() {
         return projectName;
     }
 
@@ -48,7 +48,7 @@ public class project {
         this.projectName = projectName;
     }
 
-    public String getProjectsIdentifier() {
+    public String getProjectIdentifier() {
         return projectIdentifier;
     }
 
