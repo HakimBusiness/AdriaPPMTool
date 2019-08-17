@@ -1,6 +1,7 @@
 package io.adria.ppmtool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,7 +30,9 @@ public class project {
     Date created_at;
     @JsonFormat(pattern = "yyyy-mm-dd")
     Date updated_at;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
     public project() {
     }
 
@@ -95,6 +98,14 @@ public class project {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @PrePersist
