@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+       // super.configure(http);
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement()
@@ -38,8 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.jpg",
                         "/**/*.html",
                         "/**/*.css",
-                        "/**/*.js"
+                        "/**/*.js",
+                        "/api/users/**"
                 ).permitAll()
+               // .antMatchers("/api/users/**").permitAll()
                 .anyRequest().authenticated();
     }
 }

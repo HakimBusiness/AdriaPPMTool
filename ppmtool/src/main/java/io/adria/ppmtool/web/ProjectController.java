@@ -27,7 +27,7 @@ public class ProjectController {
     @PostMapping("")
     ResponseEntity<?> addProject(@Valid  @RequestBody project p, BindingResult result)
     {
-        ResponseEntity<?> ValidationErrors=mapValidationErrorService.ErrorsMap(result);
+        ResponseEntity<?> ValidationErrors=mapValidationErrorService.MapValidationService(result);
         if(ValidationErrors!=null) return ValidationErrors;
 
         project p1=projectService.saveOrUpdateProject(p);
