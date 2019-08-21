@@ -29,21 +29,23 @@ public class ProjectService {
         }
 
     }
-    public project findProject(String identifier)
+    public project findProject(String identifier,String username)
     {
             project p=projectRepository.findByProjectIdentifier(identifier);
             if(p==null) throw new ProjectIdException("Project doesn't exist !");
+        if(!p.getProjectLeader().equals(username)){
+            throw new ProjectIdException("Project not found in your account");
+        }
             return p;
     }
 
-    public Iterable<project> findAll(){
-        return projectRepository.findAll();
+
+        public Iterable<project> findAllProjects(String username){
+            return projectRepository.findAllByProjectLeader(username);
     }
 
-    public void deleteById(String Id)
+    public void deleteById(String Id,String username)
     {
-        project p=projectRepository.findByProjectIdentifier(Id);
-        if(p==null) throw new ProjectIdException("Project with identifier "+Id+" doesn't exist !");
-        projectRepository.delete(p);
+        projectRepository.delete(findProject(Id, username));
     }
 }
