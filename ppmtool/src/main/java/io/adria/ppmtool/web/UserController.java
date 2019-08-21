@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static io.adria.ppmtool.security.SecurityConstants.TOKEN_PREFIX;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/users")
@@ -44,7 +45,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
-
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null) return errorMap;
 
